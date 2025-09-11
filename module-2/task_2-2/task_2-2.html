@@ -12,31 +12,42 @@
     <ol>
       <li>Where should you use constants, and where should you use variables? Can they all be constants?</li>
       <p>
-				[Replace this with you answer]
+				Const brukes når verdien på variablene ikke skal endres senere i programmet. I disse oppgavene er det mulig å bruke const på alt. 
 			</p>
       <li>How do parentheses affect the arithmetic outcome of an expression?</li>
       <p>
-				[Replace this with you answer]
+				Parenteser endre regnerekkefølgen. Programmet regner ut det som er inni parentesen først. Dette kan endre resultat på et regnestykket.  
 			</p>
       <li>How do we limit floating-point numbers to a given number of decimals?</li>
       <p>
-				[Replace this with you answer]
+				Vi kan bruke too.Fixed(antall desimaler) for å velge hvor mange desimaler vi vil ha med. 
+         Vi kan også bruke Math.floor(tallet) for å fjerne alle desimaler.
+         
 			</p>
       <li>How can we compare two floating-point values to see if they are equal (is 12.199999 the same as 12.2)?</li>
       <p>
-				[Replace this with you answer]
+				  For å samenligne to flyttall kan vi bruke epsilon:
+          Math.abs(12.199999 - 12.2) < 0.0001 
+
 			</p>
       <li>What do comparison operators return, and how can we check if they are FALSE or TRUE?</li>
       <p>
-				[Replace this with you answer]
+				  Sammenlignsopperatører: (==, >, <, =!)
+          Const paastand = (5 == 3) Ved å skrive slike påstander vil programmet skrive ut om de er falske eller sanne.
+
 			</p>
       <li>How does the Math.random() function work, and what can it be used for?</li>
       <p>
-				[Replace this with you answer]
+				  Math.random() generer et tilfeldig tall innenfor den rammen du gir den.
+          Det kan brukes til alt som krever tilfeldig generering av tall som blant annet spill, simuleringer eller tilfeldige utvalg. 
+
 			</p>
       <li>What is modulus (%), and when do we need this operator in mathematical operations?</li>
       <p>
-				[Replace this with you answer]
+				  (%) gir restene av en heltalsdivisjon. 
+          Fks: (10 % 3 = 1) fordi 3*3=9 og 10-9=1. 
+          Dette kan brukes til å finne ut om et tall er ett partall, finne rester etter du har foretatt et regnestykke. 
+
 			</p>
     </ol>
 		<script type="module" src="./task_2-2.mjs" defer></script>
