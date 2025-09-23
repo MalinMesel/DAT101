@@ -3,7 +3,12 @@ import { printOut, newLine } from "../../common/script/utils.mjs";
 
 printOut("--- Part 1 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Replace this with you answer!");
+let PrintValue = "";
+for (let = i =1; i <= CountTo; i++) {
+    PrintValue += "" + i.toString();
+}
+
+printOut(PrintValue);
 printOut(newLine);
 
 printOut("--- Part 2 ----------------------------------------------------------------------------------------------");
