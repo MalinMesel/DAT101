@@ -10,8 +10,28 @@
       <span id="txtOut" style="white-space: nowrap"></span>
     </div>
     <ol>
-      <li>[Write the question here, and copy this for more questions]</li>
-      <p>[Write your answer here, and copy this for more answers]</p>
+      <li> In part 1, is it possible to solve the problem using a single "for" loop?</li>
+      <p>-	Det er mulig å løse oppgave en med å kun bruke 1 «for» loop. Du må legge inn at den skal telle til 10, men også fra 10. 
+      </p>
+      <li> In part 2, can we create what is known as an "infinite" loop within the condition of the "while" loop? Describe what would or would not be necessary to achieve this. Provide a thorough explanation of your answer.</li>
+      <p>-	For å lage en “infinite» loop må påstanden alltid være «false» eller alltid være «true». I oppgave 2 vil programmet til slutt finne tallet ditt og påstanden vil gå fra å være «false» til «true». Dersom oppgave 2 skal være en «infinite loop» må koden alltid være «false»: Den kan se slik ut: 
+while (true) {
+ guessagain = Math.floor(Math.random() * 60) + 1;
+} 
+</p>
+      <li> Discuss briefly how quickly or slowly a computer might be able to compute this, considering the number of guesses and the time it takes. How does the program behave while it is guessing? Can the program perform other tasks concurrently?</li>
+      <p>-	Datamaskinen bruker bare noen få millisekunder på å komme frem til riktig tall. Desto flere tall datamaskinen har å velge mellom desto lenger tid vil det ta å komme frem til riktig tall. 
+-	Nå programmet gjetter tallet går det gjennom «while loop» helt til det finner riktig tall. Programmet gjør ingenting annet når det er opptatt med loopen. Den genererer et nummer, sjekker dette nummeret er riktig og gjentar prosessen dersom tallet ikke er riktig.
+</p>
+      <li> Explain the relationship between rows and columns in nested "for" loops. Can we, for instance, change the order, considering rows to be innermost or columns to be innermost, or does this not matter?</li>
+      <p>-	I dette eksempelet styre ytter løkken hvor mange rader vi går igjennom, og innerløkka styrer hvor mange kolonner:
+-	for (let rad = 0; rad < 5; rad++) {            
+  for (let kolonne = 0; kolonne < 5; kolonne++) {  
+    console.log(«Rad:» + rad +  «Kolonne:» + kolonne);
+  }
+}
+-	Det eneste som endres er rekkefølgen dataen blir prosessert i. Rekkefølgen avgjør hvordan ting vises på skjermen. Vi kan altså bytte rekkefølgen på innerløkker og ytterløkker. 
+</p>
     </ol>
     <script type="module" src="./task_3-2.mjs" defer></script>
   </body>
