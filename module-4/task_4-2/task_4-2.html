@@ -10,8 +10,59 @@
       <span id="txtOut" style="white-space: nowrap"></span>
     </div>
     <ol>
-      <li>[Write the question here, and copy this for more questions]</li>
-      <p>[Write your answer here, and copy this for more answers]</p>
+      <li>What is an array? A short and concise answer is expected here!</li>
+      <p>En array er en struktur som lagrer flere verdier i en variabel. </p>
+      <li>What does it mean to "hardcode" when we talk about programming? (In English, it's called "hardcoding", "hard-coding", or "hardcoding").</li>
+      <p>Å hardkode betyr å skrive verdier direkte inn i koden i stedet for å hente dem fra input, variabler, filer eller databaser. Det er faste, uforanderlige verdier som programmereren legger inn manuelt. </p>
+      <li>Explain in plain text what happens in task 3, and how we can traverse (iterate) the array when we (humans) don't "know" how long the array is.</li>
+      <p>Strengen "Hei på deg, hvordan har du det?" deles opp i ord ved hjelp av split(" ").
+Resultatet blir et array med hvert ord som et eget element. Deretter brukes en for-løkke til å gå gjennom alle elementene i arrayet. Inne i løkken skriver man ut indeks og ord.
+Når vi ikke vet lengden på arrayet, kan vi likevel iterere ved å bruke:
+for (let i = 0; i < array.length; i++)
+array.length forteller alltid hvor mange elementer arrayet har, så vi trenger aldri å vite det på forhånd.
+</p>
+      <li>Why is it beneficial to store instances of a class in arrays, as in task 4?</li>
+      <p>Det er nyttig å kunne lagre «instances of a class inn arrayays» fordi vi kan behandle mange objekter på en strukturert måte. Vi kan loope gjennom dem, søke, sortere eller endre. Det gjør koden ryddig og skalerbar når man jobber med mange lignende dataobjekter. Et array gir oss mulighet til å organisere mange objekter og jobbe effektivt med dem.</p>
+      <li>Try your best to explain the EWeekDays object from task 7. How do we use the "value" attribute, for example? In what way do "WeekDay", "Workdays", and "Weekends" differ from each other? If we wanted to create a new element "WorkoutDays", which would contain "Monday", "Wednesday", and "Thursday", how would it ideally look? (I will choose the best answer to this task and reward it with pizza in the cafeteria right after New Year. Remember to mark in your submission if you want to participate in the competition!)</li>
+      <p>EWeekDays er et objekt som fungerer som inneholder navn på ukedager. Hver ukedag har en egen verdi i heksadesimal (0x01, 0x02, 0x04 osv.). Hver verdi er en bit som kan kombineres med andre.
+Hvordan brukes "value"?: Verdien er et tall som representerer én eller flere dager med hjelp av bit-operasjoner. For eksempel:
+•	Mandag = 0x01
+•	Onsdag = 0x04
+•	Torsdag = 0x08
+Workdays er en kombinasjon av alle bitene for mandag–fredag:
+0x01 + 0x02 + 0x04 + 0x08 + 0x10
+Weekends er en kombinasjon av lørdag og søndag.
+Hvordan skiller WeekDay, Workdays og Weekends seg?:
+•	WeekDay1–7 representerer én dag hver.
+•	Workdays representerer flere dager samtidig, pakket inn i ett tall.
+•	Weekends gjør det samme, men for lørdag og søndag.
+Hvordan ville “WorkoutDays” se ut?:
+Vi vil bruke mandag (0x01), onsdag (0x04) og torsdag (0x08).
+WorkoutDays: { value: 0x01 + 0x04 + 0x08, name: "WorkoutDays" }</p>
+      <li>In task 8, we will use a "callback" routine when sorting. Explain how such a "callback" routine works.</li>
+      <p>En “callback” rutine virker slik at en funksjon kan rope på en annen funksjon. Det er en referanse til tidligere kode og blir brukt som brukes som et argument til annen kode. 
+En callback i sortering er en funksjon som arrayet kaller for hvert par av elementer det sammenligner.
+Sorteringsalgoritmen sender to verdier om gangen (a og b) inn i callbacken.
+Callbacken returnerer:
+•	et negativt tall → a kommer før b
+•	0 → de er like
+•	et positivt tall → a kommer etter b
+Dermed bestemmer callbacken sorteringsrekkefølgen.</p>
+      <li>What happens in the sorting routines you have created? Try to explain how the array can figure out if an element should come before or after another. The best way to answer this is to actually print both parameters each time the sorting routine runs.</li>
+      <p>Når koden kjøres:
+ascendingNumbers.sort((a, b) => a - b);
+… så gjør sort-funksjonen dette:
+1.	Den plukker ut to tall fra arrayet, f.eks. a = 14 og b = 3.
+2.	Den sender dem til callbacken.
+3.	Callbacken returnerer et tall som forteller hvilken som skal først.
+o	Hvis resultatet er negativt (3 - 14 = -11), kommer 3 før 14.
+Sorteringen gjentas mange ganger med ulike kombinasjoner av a og b, helt til hele arrayet er i riktig rekkefølge.</p>
+      <li>In task 10, we will create an array with rows and columns. Explain what the first element of the array contains.</li>
+      <p>array2D[0] er den første raden i 2D-arrayet.
+Den inneholder en liste med ni elementer som ser slik ut:
+["1, 1", "1, 2", "1, 3", ..., "1, 9"]
+Altså:
+Alle kolonnene i rad 1, på formatet "rad, kolonne"</p>
     </ol>
     <script type="module" src="./task_4-2.mjs" defer></script>
   </body>

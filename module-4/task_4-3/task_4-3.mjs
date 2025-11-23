@@ -47,6 +47,20 @@ const MovieGenre = [
 
 //--- Part 1 ----------------------------------------------------------------------------------------------
 /* Put your code below here!*/
+function cmbTask1CalculateClick(){
+  const txtTask1Output = document.getElementById("txtTask1Output");
+  const txtRectHeight = document.getElementById("txtRectHeight");
+  const txtRectWidth = document.getElementById("txtRectWidth");
+  const width = parseInt(txtRectWidth.Value); //hva er nytten med parseint (eksamens oppgave)
+  const height = parseInt(txtRectHeight);
+  const area = width * height;
+  const perimeter = 2 * (width + height);
+  txtTask1Output.innerHTML = "width: " + width + ", height: " + height;
+  txtTask1Output.innerHTML += "<br/>Area: " + area + ", Perimeter: " + perimeter;
+}
+
+let cmbTask1Calculate = document.getElementById("cmbTask1Calculate");
+cmbTask1Calculate.onClick = cmbTask1CalculateClick;
 
 //--- Part 2 ----------------------------------------------------------------------------------------------
 /* Put your code below here!*/
