@@ -167,30 +167,63 @@ printOut("--- Part 7 -----------------------------------------------------------
 /* Put your code below here!*/
 function calculate(distance, time, speed) {
     // Count missing values
-    const missing = [distance, time, speed].filter(v => v === null || v === undefined).length;
+    let missingCount = 0;
+    if (distance === null || distance === undefined) missingCount++;
+    if (time === null || time === undefined) missingCount++;
+    if (speed === null || speed === undefined) missingCount++;
 
     // If more than one parameter is missing → return NaN
-    if (missing > 1) return NaN;
+    if (missingCount > 1) {
+      printOut("NaN");
+      printOut(newLine);
+      return;
+    }
 
     // Calculate the missing parameter
-    if (speed === null || speed === undefined) {
-        return distance / time;             // speed
+    if (speed === undefined || speed === null) {
+        speed = distance / time;             // speed
+        printOut("Speed = " + speed.toFixed(2) + " km/h");
     } else if (time === null || time === undefined) {
-        return distance / speed;            // time
-    } else if (distance === null || distance === undefined) {
-        return speed * time;                // distance
+        time = distance / speed;            // time
+        printOut("Time = " + time.toFixed(2) + " h");
+    } else if (distance === undefined || distance === null) {
+        distance = speed * time;                // distance
+        printOut("Distance = " + distance.toFixed(2) + " km");
     }
 
     // If nothing is missing, you can either return speed or the full object
-    return speed;
+    printOut("Speed: " + speed.toFixed(2) + " km/h, Time: " + time.toFixed(2) + " h, Distance: " + distance.toFixed(2) + " km");
 }
-printOut("Calculate speed (distance=150 km, time=3 h): " + calculate(150, 3, null) + " km/h");
-printOut("Calculate time (distance=150 km, speed=50 km/h): " + calculate(150, null, 50) + " h");
-printOut("Calculate distance (time=3 h, speed=50 km/h): " + calculate(null, 3, 50) + " km");
+calculate(75, 50, undefined);
+calculate(60, undefined, 2.0);
+calculate(undefined, 2, 30);
+calculate(100, undefined, undefined);
+
 printOut(newLine);
 
 printOut("--- Part 8 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+
+function makeText(text, maxSize, character, paddingBefore){
+  let newText = text;
+
+  text = String(text);
+
+  if (text.length < maxSize){
+    const padLength = maxSize - text.length;
+    const padding = character.repeat(padLength);
+
+    if (paddingBefore) {
+      newText = padding + text;
+    } else {
+      newText = text + padding;
+    }
+  }
+  printOut(newText);
+  return newText;
+}
+makeText("Dette er en tekst", 30, " ", false);
+makeText("Dette er en annen tekst", 40, " ", true);
 
 printOut(newLine);
 

@@ -14,9 +14,10 @@ printOut(newLine);
 
 printOut("--- Part 2 ----------------------------------------------------------------------------------------------");
 class TAccount {
-  constructor(type, balance) {
+  constructor(type, balance = 0) {
     this.type = type;
-    this.balance = balance;
+    this.balance = Number(balance) || 0;
+    this.withdrawls = 0;
   }
   toString() {
     return this.type;
@@ -24,19 +25,35 @@ class TAccount {
   setType(newType) {
     printOut("Account type changed from " + this.type + " to " + newType);
     this.type = newType;
+    this.withdrawls = 0;
   }
   getBalance() {
     return this.balance;
   }
   deposit(Aamount) {
     this.balance += Aamount;
+    this.withdrawls = 0;
+    return this.balance;
+  }
+  canWithdraw() {
+    switch (this.type) {
+      case "Saving":         
+      case "Sparekonto":      
+        return this.withdrawals < 3;
+      case "Pension":         
+      case "Pensjonistkonto": 
+        return false;
+      default:
+        return true;
+    }
   }
   withdraw(Aamount){
-    if (Aaomunt > this.balance){
-      printOut("Insufficient funds")
+    if (Aamount > this.balance){
+      printOut("Insufficient funds");
+      return this.balance;
     } else {
       this.balance -= Aamount;
-      printOut("Withdrew " + Aamount + ". New balance: " + this.balance);
+      return this.balance;
     }
   }
 }
@@ -49,13 +66,26 @@ printOut(newLine);
 
 printOut("--- Part 3 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
-printOut("Deposit of " + deposit + ", new balance is " + myAccount.getBalance());
-printOut("Withdrawl of " + withdrawl + ", new balance is " + myAccount.getBalance());
+const depositAmount = 100;
+const withdrawAmount = 25;
+
+const balanceAfterDeposit = myAccount.deposit(depositAmount);
+printOut("Deposit of " + depositAmount + ", new balance is " + balanceAfterDeposit);
+const balanceAfterWithdraw = myAccount.withdraw(withdrawAmount);
+printOut("Withdraw of " + withdrawAmount + ", new balance is " + balanceAfterWithdraw);
+
 printOut("My account balance is " + myAccount.getBalance());
 printOut(newLine);
 
 printOut("--- Part 4 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
+switch (myAccount.type()){
+  default:
+    text = "Du kan ta ut så mange ganger du vil.";
+    break;
+  case "Sparekonto":
+    text = "Du kan ta ut 3 ganger"; 
+}
 printOut("Replace this with you answer!");
 printOut(newLine);
 
