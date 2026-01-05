@@ -10,8 +10,27 @@
       <span id="txtOut" style="white-space: nowrap"></span>
     </div>
     <ol>
-      <li>[Write the question here, and copy this for more questions]</li>
-      <p>[Write your answer here, and copy this for more answers]</p>
+      <li>1.	Why is object-oriented development so important in programming?</li>
+      <p>- Objektorientert utvikling er viktig fordi det gjør det lettere å strukturere og organisere kode når programmer blir store og komplekse. Kort sagt gjør det programmer mer organisert, fleksible og skalerbare.</p>
+      <li>In Task 1, we create a static object called "AccountType." Explain what this object is used for and how this type of object can help us in software development.</li>
+      <p>- Et statisk objekt som AccountType brukes til å definere faste verdier eller konstanter som ikke skal endres. Dette gjør utviklingen mer robust og mindre feilutsatt, spesielt i store programmer.</p>
+      <li>Discuss why we use encapsulation in classes. Why do we want to "hide" code within our class? Explain how we can create "private" and "public" members in a constructor function.</li>
+      <p>- Innkapsling betyr at vi skjuler detaljer inni en klasse, og kun gjør det vi ønsker tilgjengelig for andre. Det gjør at brukere av klassen trenger bare å vite hvordan de kaller metodene, ikke hvordan de fungerer inni.
+Hvordan lage private og public medlemmer i en konstruktørfunksjon:
+function BankAccount(initialBalance) {
+  let balance = initialBalance; // private
+  this.deposit = function(amount) { // public
+    if(amount > 0) balance += amount;
+  };
+  this.getBalance = function() { // public
+    return balance;
+  };
+}
+•	balance er privat – kan ikke endres direkte utenfor funksjonen.
+•	deposit og getBalance er public – kan brukes av koden utenfor objektet.
+</p>
+      <li>Explain what happens when we use the "new" command in JavaScript.</li>
+      <p>- new lager et nytt objekt basert på klassen/konstruktøren og setter opp alt som trengs for å bruke det.</p>
     </ol>
     <script type="module" src="./task_4-1.mjs" defer></script>
   </body>

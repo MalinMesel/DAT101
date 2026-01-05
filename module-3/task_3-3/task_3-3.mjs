@@ -204,6 +204,7 @@ printOut(newLine);
 printOut("--- Part 8 ----------------------------------------------------------------------------------------------");
 /* Put your code below here!*/
 
+
 function makeText(text, maxSize, character, paddingBefore){
   let newText = text;
 
@@ -293,3 +294,4 @@ function printFactorial(n) {
 
 printFactorial(9); 
 printOut(newLine);
+
