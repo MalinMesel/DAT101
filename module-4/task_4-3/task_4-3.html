@@ -97,8 +97,19 @@
   </div>
 </fieldset>
 <ol>
-  <li>[Write the question here, and copy this for more questions]</li>
-  <p>[Write your answer here, and copy this for more answers]</p>
+  <li>1.	In this assignment, we use the DOM. Explain how this library can help us develop interactive webpages.</li>
+  <p>- DOM (Document Object Model) er et programmeringsgrensesnitt som lar JavaScript samhandle med HTML-siden. DOM representerer nettsiden som et tre av objekter (elementer), som vi kan lese og endre med kode. Ved hjelp av DOM kan vi endre innhold på siden (tekst, bilder, knapper). Vi kan endre stil (farger, skjule/vise elementer). I tillegg kan vi reagere på brukerhandlinger (klikk, tastetrykk, musbevegelser). Dette gjør nettsider interaktive, fordi siden kan reagere dynamisk uten å lastes på nytt.</p>
+  <li>2.	What is an event? Simply explain what happens when we add an event listener to an object.</li>
+  <p>- Et event er noe som skjer i nettleseren, vanligvis utløst av brukeren, for eksempel: Klikk på en knapp, tastetrykk på tastaturet, bevegelse av musen. Når vi legger til en event listener på et objektorteller vi nettleseren at den skal lytte  fetter et bestemt event. Når eventet skjer, kjøres en funksjon (event handler). Funksjonen bestemmer hva som skal skje videre i programmet.</p>
+  <li>3.	Sometimes we need to use an event object to get data from the event. Explain how this event object is structured, don't explain all functions or attributes. Try to explain, for example, how to retrieve data from a keyboard or mouse.</li>
+  <p>-	Når et event skjer, sender nettleseren med et event-objekt til funksjonen som håndterer eventet.
+Event-objektet: Er et objekt som inneholder informasjon om hva som skjedde. Har egenskaper (properties) som gir detaljer om eventet. Eksempler: Tastatur: event.key   // hvilken tast som ble trykket (f.eks. "Enter", "a"). Mus: event.clientX  // x-posisjon til musen. event.clientY  // y-posisjon til musen. Vi bruker altså event-objektet for å hente data fra brukerens handling.
+
+</p>
+  <li>4.	Explain the main difference between DOM id and DOM name. Can we have identical IDs?</li>
+  <p>-	DOM id: Skal være unik på hele nettsiden. Brukes for å identifisere ett spesifikt element. Hentes ofte med document.getElementById()
+-	DOM name: Trenger ikke å være unik. Flere elementer kan ha samme name. Brukes ofte i skjemaer (forms). Vi kan ikke ha identiske IDs på samme nettside. Hvis vi har det, kan JavaScript og CSS oppføre seg uforutsigbart.
+</p>
 </ol>
 <script type="module" src="./task_4-3.mjs" defer></script>
 </body>
