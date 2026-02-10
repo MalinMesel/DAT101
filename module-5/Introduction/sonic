@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>Sonic Example</title>
+    <style>
+      .prevent-select {
+        -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* IE 10 and IE 11 */
+        user-select: none; /* Standard syntax */
+      }
+    </style>
+  </head>
+  <body class="prevent-select">
+    <canvas id="cvs" style="background-color: antiquewhite" width="1024" height="512"></canvas>
+  </body>
+  <script defer>
+    const cvs = document.getElementById("cvs"); //Henter canvas-elementet
+    const ctx = cvs.getContext("2d"); //Henter 2D-tegnekonteksten
+    const sonicPath = "sonic_sprite_sheet.png" //Path til sprite sheet
+    const sonicSheet = new Image(); //Oppretter et nytt bildeobjekt
+    const sonic2 = {x : 0, y : 127, width: 102, height: 121,count: 9}; //Definerer en animasjon for Sonic
+    let frameNumber = 0; //Startframe
+    let posX = 0; //Startposisjon på X-aksen
+
+function animate(){ //Animere Sonic
+  ctx.clearRect(0, 0, cvs.width, cvs.height); //Tømmer canvaset før ny tegning
+  const dx = 0, dy = 100, dw = sonic2.width, dh = sonic2.height; //Destinasjonsparametere
+  const sx = frameNumber * sonic2.width, sy = sonic2.y, sw = sonic2.width, sh = sonic2.height; //Kildeparametere
+  ctx.drawImage(sonicSheet, sx, sy, sw, sh, dx + posX, dy, dw, dh); //Tegner gjeldende frame av Sonic på canvaset
+  frameNumber++; //Øker frame nummeret for neste animasjon
+  
+  
+  if(posX < cvs.width - sonic2.width){ //Sjekker om Sonic er innenfor canvasets grenser
+    frameNumber++; //Øker frame nummeret for neste animasjon
+    if(frameNumber >= sonic2.count){ //Hvis vi har nådd slutten av animasjonen
+    frameNumber = 0; //Tilbakestill til første frame
+    }
+    posX+=25; //Flytter Sonic til høyre
+    console.log(posX); //Logger posisjonen til konsollen
+  } else {
+    posX = cvs.width - sonic2.width; //Holder Sonic innenfor canvasets grenser
+  } 
+  }
+    
+
+function sonicSheetLoaded(){ //Kalles når sprite sheet er lastet
+   console.log("Sprite Sheet Loaded!"); //Logger melding til konsollen
+   setInterval(animate, 100); //millisekkunder
+}
+
+  
+  sonicSheet.addEventListener("load", sonicSheetLoaded); //Lytter etter "load" hendelsen
+  sonicSheet.src = sonicPath; //Setter kilden til sprite sheet bildet
+
+
+
+    //Tegne figurer
+    //ctx.beginPath(); //Begynner en ny sti
+    //ctx.moveTo(50, 100); //Flytter "pennen" til startpunktet (50,100)
+    //ctx.lineTo(250, 100); //Tegner en linje til punktet (250,100)
+    //ctx.lineTo(250, 300); //Tegner en linje til punktet (250,300)
+    //ctx.lineTo(50, 300);
+    //ctx.closePath(); //Lukker stien ved å tegne en linje tilbake til startpunktet
+    //ctx.fill(); //Fyller det lukkede området med gjeldende fyllfarge
+    //ctx.stroke(); //Tegner konturen av stien med gjeldende strekfarge
+  </script>
+</html>
