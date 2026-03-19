@@ -1,6 +1,6 @@
 "use strict";
 import { TSprite } from "libSprite";
-import { EGameStatus, menu} from "./FlappyBird.mjs";
+import { EGameStatus, menu, soundMuted } from "./FlappyBird.mjs";
 import { TSineWave } from "lib2d";
 import { TSoundFile } from "libSound";
 
@@ -8,65 +8,108 @@ const fnFood = "./Media/food.mp3";
 const fnHeroIsDead = "./Media/heroIsDead.mp3";
 const fnGameOver = "./Media/gameOver.mp3";
 
-export class THero extends TSprite{ //EKSAMENS OPPGAVE hvordan funker arv
-    #gravity;
-    #speed;
-    #wave;
-    #sfFood;
-    #sfHeroIsDead;
-    #sfGameOver; 
-    constructor(aSpcvs, aSPI){
-        super(aSpcvs, aSPI, 100, 100); // kall til superklasse konstruktør
-        this.animationSpeed = 17; // hastighet på animasjon
-        this.#gravity = 9.81 / 100; // tyngdekraft akselerasjon
-        this.#speed = 0; // start hastighet
-        // this.debug = true;
-        this.#wave = new TSineWave(1, 1);
-        this.y += this.#wave.value;
-        this.#sfFood = null;
-        this.#sfHeroIsDead = null;
-        this.#sfGameOver = null;
-    }
+export class THero extends TSprite {
+  #gravity;
+  #speed;
+  #wave;
+  #sfFood;
+  #sfHeroIsDead;
+  #sfGameOver;
+  constructor(aSpcvs, aSPI) {
+    super(aSpcvs, aSPI, 100, 20);
+    this.animationSpeed = 20;
+    this.#gravity = 9.81 / 100;
+    this.#speed = 0;
+    this.#wave = new TSineWave(1, 1);
+    this.y += this.#wave.value;
+    this.#sfFood = null;
+    this.#sfHeroIsDead = null;
+    this.#sfGameOver = null;
+  }
+
+  // Inside THero class (hero.js)
+  restart() {
+    this.x = 100; // Reset horizontal position
+    this.y = 20; // Reset vertical position
+    this.rotation = 0; // Reset rotation
+    this.#speed = 0; // Reset speed
+    this.animationSpeed = 20; // Restore animation speed
+  }
 
   eat() {
-    if (this.#sfFood === null) {
-      this.#sfFood = new TSoundFile(fnFood);
-    } else {
+  //  Check if sound is muted before playing the food sound effect
+  if (soundMuted) {
+    if (this.#sfFood) {
       this.#sfFood.stop();
     }
-    this.#sfFood.play();
+    return;
   }
-    
-    animate(){
-      const hasGravity = 
-      EGameStatus.state === EGameStatus.gaming || 
-      EGameStatus.state === EGameStatus.heroIsDead;;
-        if(hasGravity){
-        if(this.y < 400 - this.height){
-         this.#speed += this.#gravity; // akselerasjon pga tyngdekraft
-         this.y += this.#speed; // oppdater posisjon
-         if(this.rotation < 90){ // maks rotasjon nedover
-         this.rotation = this.#speed*25; // roterer fuglen nedover basert på hastighet
+  // Food sound effect
+  if (this.#sfFood === null) {
+    this.#sfFood = new TSoundFile(fnFood);
+  } else {
+    this.#sfFood.stop(); // Stop the sound if it's already playing
+  }
+
+  this.#sfFood.play();
+}
+
+  animate() {
+    const hasGravity = EGameStatus.state === EGameStatus.gaming || EGameStatus.state === EGameStatus.heroIsDead;
+
+    if (hasGravity) {
+      // Apply gravity
+      if (this.y + this.height < 400) {
+        // playable area height = 400
+        this.#speed += this.#gravity; // increase speed due to gravity
+        this.y += this.#speed; // update position based on speed
+
+        // Rotate hero down while falling
+        if (this.rotation < 90) {
+          this.rotation = this.#speed * 25;
         }
-     } else {
-      EGameStatus.state = EGameStatus.gameOver;
-      menu.stopSound();
-      this.animationSpeed = 0;
-      this.#sfGameOver = new TSoundFile(fnGameOver);
-      this.#sfGameOver.play();
-     }
-    } else if(EGameStatus.state === EGameStatus.idle){
-       this.y += this.#wave.value;
-    }
-  } //End of animate
+      } else {
+        // Hero hits the ground → Game Over
+        if (EGameStatus.state !== EGameStatus.gameOver) {
+          this.y = 400 - this.height; // snap to ground
+          EGameStatus.state = EGameStatus.gameOver;
+          this.animationSpeed = 0;
 
-  dead(){
-    this.#sfHeroIsDead = new TSoundFile(fnHeroIsDead);
-    this.#sfHeroIsDead.play();
+          // Stop game sounds
+          menu.stopSound();
+
+          // Play Game Over sound
+          if (!soundMuted) {
+                  this.#sfGameOver = new TSoundFile(fnGameOver);
+                  this.#sfGameOver.play();
+                } else {
+                  this.#sfGameOver = null;
+                }
+
+          console.log("Game Over triggered!");
+
+          // Call menu to show Game Over UI
+          menu.showGameOver(menu.gameScore);
+        }
+      }
+    } else if (EGameStatus.state === EGameStatus.idle) {
+      // Idle animation (floating effect)
+      this.y += this.#wave.value;
+    }
+  }
+  // End of animate
+
+  dead() {
+   if (!soundMuted) {
+           this.#sfHeroIsDead = new TSoundFile(fnHeroIsDead);
+           this.#sfHeroIsDead.play();
+         } else {
+           this.#sfHeroIsDead = null;
+         }
   }
 
-  flap(){
-    this.#speed = -4; // gi en oppover hastighet
-    this.rotation = 0; 
+  flap() {
+    this.#speed = -3.5;
+    this.rotation = 0;
   }
 }
